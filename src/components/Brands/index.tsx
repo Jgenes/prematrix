@@ -25,28 +25,29 @@ export default Brands;
 
 const SingleBrand = ({ brand }: { brand: Brand }) => {
   const { href, image, imageLight, name } = brand;
+  const isBGC = name === "BGC";
 
   return (
-    /* Adjusted width and padding for a compact technical grid */
-    <div className="flex w-1/3 items-center justify-center px-4 py-4 sm:w-1/3 md:w-1/4 lg:w-1/6">
+    <div className="flex w-full items-center justify-center px-4 py-5 sm:w-1/2 lg:w-1/3">
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative h-6 w-full max-w-[85px] opacity-40 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 dark:opacity-30 dark:hover:opacity-100"
+        className={`relative w-full max-w-[220px] opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 dark:opacity-70 dark:hover:opacity-100 ${
+          isBGC ? "h-24 max-w-[280px]" : "h-20"
+        }`}
       >
-        {/* Using object-contain to ensure logos don't stretch and stay tiny/clean */}
-        <Image 
-          src={imageLight} 
-          alt={name} 
-          fill 
-          className="hidden object-contain dark:block" 
+        <Image
+          src={imageLight}
+          alt={name}
+          fill
+          className="hidden object-contain dark:block"
         />
-        <Image 
-          src={image} 
-          alt={name} 
-          fill 
-          className="block object-contain dark:hidden" 
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="block object-contain dark:hidden"
         />
       </a>
     </div>
