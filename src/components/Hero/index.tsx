@@ -2,56 +2,109 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { FiShield, FiCpu, FiCheckCircle, FiActivity, FiLayers } from "react-icons/fi";
 
 const Hero = () => {
   return (
     <>
       <section
         id="home"
-        className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[160px] xl:pb-[140px] xl:pt-[180px] antialiased"
+        className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[100px] md:pt-[150px] xl:pb-[120px] xl:pt-[170px] antialiased"
       >
-        <div className="container">
+        <div className="container max-w-[1200px]">
           <div className="-mx-4 flex flex-wrap items-center justify-center">
             <div className="w-full px-4">
-              <div className="mx-auto max-w-[800px] text-center">
+              <div className="mx-auto max-w-[850px] text-center">
                 
+                {/* 2026 Profile Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+                >
+                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                  Company Profile 2026 • Secure. Compliant. Scalable.
+                </motion.div>
+
                 <motion.h1
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="mb-6 text-3xl font-bold leading-[1.2] tracking-tight text-black dark:text-white sm:text-4xl md:text-5xl lg:leading-[1.1]"
+                  className="mb-6 text-3xl font-bold leading-[1.2] tracking-tight text-black dark:text-white sm:text-4xl md:text-5xl lg:text-[52px] lg:leading-[1.15]"
                 >
-                  Engineering Secure Digital Systems for{" "}
-                  <span className="text-primary">
-                    Compliance-Driven
-                  </span>{" "}
-                  Organizations
+                  Engineering Secure{" "}
+                  <span className="text-primary">Digital Systems</span>
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  // Research Insight Font: 14px tracking wide
-                  className="mx-auto mb-10 max-w-[700px] text-[14px] font-medium leading-relaxed tracking-wide text-body-color opacity-80 dark:text-body-color-dark sm:text-[15px] lg:px-8"
+                  className="mx-auto mb-10 max-w-[760px] text-[14px] font-medium leading-relaxed tracking-wide text-body-color dark:text-gray-300 sm:text-[16px] lg:px-4"
                 >
-                  Primematrix Tanzania Limited delivers enterprise-grade data protection, 
-                  cybersecurity, and fintech engineering aligned with Tanzanian and 
-                  global regulatory standards.
+                  Integrated ICT infrastructure, cybersecurity, data-protection compliance, 
+                  fintech software, and project delivery for banks, mobile network operators, 
+                  government, mining, and enterprise.
                 </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="flex items-center justify-center"
+                  className="flex flex-wrap items-center justify-center gap-4 mb-14"
                 >
                   <Link
-                    href="#capabilities" // Links directly to the capabilities section
-                    className="rounded-sm bg-primary px-8 py-4 text-[12px] font-bold uppercase tracking-[2px] text-white shadow-md transition duration-300 hover:bg-primary/90 hover:shadow-lg"
+                    href="#capabilities"
+                    className="rounded-sm bg-primary px-8 py-3.5 text-xs font-bold uppercase tracking-[2px] text-white shadow-md transition duration-300 hover:bg-primary/90 hover:shadow-lg"
                   >
-                    SERVICES
+                    Capability Pillars
                   </Link>
+                  <Link
+                    href="/mining"
+                    className="rounded-sm border border-primary px-8 py-3.5 text-xs font-bold uppercase tracking-[2px] text-primary hover:bg-primary hover:text-white transition duration-300"
+                  >
+                    Mining Solutions
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="rounded-sm border border-gray-300 dark:border-gray-700 px-7 py-3.5 text-xs font-bold uppercase tracking-[2px] text-black dark:text-white hover:border-primary transition duration-300"
+                  >
+                    Readiness Discussion
+                  </Link>
+                </motion.div>
+
+                {/* Key Metrics Banner from Page 3 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-sm bg-gray-50/80 dark:bg-gray-800/40 border border-gray-100 dark:border-gray-800 text-center"
+                >
+                  <div className="p-2">
+                    <h3 className="text-2xl font-bold text-primary">8</h3>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400 mt-1">
+                      Capability Pillars
+                    </p>
+                  </div>
+                  <div className="p-2">
+                    <h3 className="text-2xl font-bold text-black dark:text-white">7</h3>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400 mt-1">
+                      PDPA Phases
+                    </p>
+                  </div>
+                  <div className="p-2">
+                    <h3 className="text-2xl font-bold text-black dark:text-white">15+</h3>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400 mt-1">
+                      Sectors Served
+                    </p>
+                  </div>
+                  <div className="p-2">
+                    <h3 className="text-2xl font-bold text-primary">24/7</h3>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400 mt-1">
+                      Active Monitoring
+                    </p>
+                  </div>
                 </motion.div>
 
               </div>

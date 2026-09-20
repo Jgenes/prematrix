@@ -54,11 +54,10 @@ const AboutSectionTwo = () => {
                   viewport={{ once: true }}
                 >
                   <h3 className="mb-2 text-[15px] font-bold uppercase tracking-wider text-black dark:text-white">
-                    01. Start Your Project
+                    01. Understand the need
                   </h3>
                   <p className="text-[13.5px] leading-relaxed text-body-color dark:text-body-color-dark opacity-85">
-                    Kick off your digital initiative with expert guidance and a secure, 
-                    compliance-focused foundation tailored for scalability.
+                    We clarify your operational, regulatory, and technology requirements before recommending a path forward.
                   </p>
                 </motion.div>
 
@@ -70,11 +69,10 @@ const AboutSectionTwo = () => {
                   viewport={{ once: true }}
                 >
                   <h3 className="mb-2 text-[15px] font-bold uppercase tracking-wider text-black dark:text-white">
-                    02. Compliance Assessment
+                    02. Design and deliver
                   </h3>
                   <p className="text-[13.5px] leading-relaxed text-body-color dark:text-body-color-dark opacity-85">
-                    Evaluate your systems and internal processes to ensure full regulatory 
-                    and data protection compliance with local and global laws.
+                    Our team turns the brief into an appropriate architecture, implementation plan, and secure working solution.
                   </p>
                 </motion.div>
 
@@ -86,11 +84,10 @@ const AboutSectionTwo = () => {
                   viewport={{ once: true }}
                 >
                   <h3 className="mb-2 text-[15px] font-bold uppercase tracking-wider text-black dark:text-white">
-                    03. Launch & Scale
+                    03. Govern and grow
                   </h3>
                   <p className="text-[13.5px] leading-relaxed text-body-color dark:text-body-color-dark opacity-85">
-                    Deploy your secure digital platform efficiently, with continuous 
-                    monitoring and confidence in long-term performance.
+                    We stay close after delivery with documentation, governance, and support that keep the solution dependable.
                   </p>
                 </motion.div>
 

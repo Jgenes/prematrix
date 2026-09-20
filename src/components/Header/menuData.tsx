@@ -14,7 +14,7 @@ const menuData: Menu[] = [
     newTab: false,
   },
 
-  // SERVICES
+  // SERVICES - 8 CAPABILITY PILLARS
   {
     id: 3,
     title: "Services",
@@ -22,69 +22,48 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 31,
-        title: "Data Protection & Compliance",
-        path: "/data",
+        title: "Mining Technology & Security",
+        path: "/mining",
         newTab: false,
       },
       {
         id: 32,
-        title: "Cyber Security & Digital Foreinsics",
-        path: "/cyber",
-        newTab: false,
-      },
-      {
-        id: 33,
-        title: "ICT Systems Engineering",
+        title: "Infrastructure & Networking",
         path: "/engineering",
         newTab: false,
       },
       {
+        id: 33,
+        title: "Cybersecurity & Forensics",
+        path: "/cyber",
+        newTab: false,
+      },
+      {
         id: 34,
-        title: "Software Development",
-        path: "/software",
+        title: "PDPA & Compliance",
+        path: "/data",
         newTab: false,
       },
       {
         id: 35,
-        title: "Platform Management",
-        path: "/platform",
+        title: "Software & Digital Banking",
+        path: "/software",
         newTab: false,
       },
       {
         id: 36,
-        title: "Fintech Development",
+        title: "Fintech Systems",
         path: "/fintech",
+        newTab: false,
+      },
+      {
+        id: 37,
+        title: "Platform & Managed Services",
+        path: "/platform",
         newTab: false,
       },
     ],
   },
-
-  // SOLUTIONS
-  // {
-  //   id: 4,
-  //   title: "Solutions",
-  //   newTab: false,
-  //   submenu: [
-  //     {
-  //       id: 41,
-  //       title: "Software & Platform",
-  //       path: "/software",
-  //       newTab: false,
-  //     },
-  //     {
-  //       id: 42,
-  //       title: "ICT Projects",
-  //       path: "/projects",
-  //       newTab: false,
-  //     },
-  //     {
-  //       id: 43,
-  //       title: "Compliance & Data Protection",
-  //       path: "/compliance",
-  //       newTab: false,
-  //     },
-  //   ],
-  // },
 
   // COMPANY
   {
@@ -94,12 +73,18 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 51,
+        title: "Corporate Profile & Standing",
+        path: "/about#corporate-standing",
+        newTab: false,
+      },
+      {
+        id: 52,
         title: "Training Academy",
         path: "/training",
         newTab: false,
       },
       {
-        id: 52,
+        id: 53,
         title: "Research & Insights",
         path: "/insights",
         newTab: false,

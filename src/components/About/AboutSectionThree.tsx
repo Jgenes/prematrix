@@ -55,25 +55,25 @@ const AboutSectionTwo = () => {
             <div className="w-full px-4 lg:w-1/2">
               <div className="max-w-[540px] lg:ml-auto">
                 <h2 className="mb-4 text-xs font-bold uppercase tracking-[3px] text-primary">
-                  Market Reach
+                  Who we support
                 </h2>
                 <h3 className="mb-4 text-xl font-bold leading-tight text-black dark:text-white sm:text-2xl">
-                  Industry Coverage
+                  Built for regulated environments
                 </h3>
                 <p className="mb-8 text-[14px] leading-relaxed text-body-color dark:text-body-color-dark opacity-80">
-                  Primematrix provides sector-specific digital solutions designed to navigate complex regulatory landscapes while maintaining operational agility.
+                  PrimeMatrix supports institutions and businesses where security, continuity, and responsible use of data are essential to everyday work.
                 </p>
 
                 <div className="mb-10 grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
                   <div className="space-y-1">
-                    <List text="Financial Institutions" />
-                    <List text="Government Agencies" />
-                    <List text="Education Sector" />
+                    <List text="Financial institutions" />
+                    <List text="Government and public sector" />
+                    <List text="Education and training" />
                   </div>
                   <div className="space-y-1">
-                    <List text="Fintech Startups" />
-                    <List text="Corporate Groups" />
-                    <List text="NGO & Logistics" />
+                    <List text="Fintech and digital services" />
+                    <List text="Corporate organizations" />
+                    <List text="NGOs and development partners" />
                   </div>
                 </div>
 

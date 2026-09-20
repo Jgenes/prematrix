@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   FiX, FiShield, FiLayers, FiSettings, 
-  FiCheckCircle, FiAlertTriangle, FiTarget, FiActivity 
+  FiCheckCircle, FiAlertTriangle, FiTarget, FiActivity,
+  FiFileText, FiUserCheck, FiDatabase, FiLock, FiArrowRight
 } from "react-icons/fi";
 
 const fadeUp = {
@@ -14,192 +16,302 @@ const fadeUp = {
 };
 
 const DataProtectionPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState<null | number>(null);
+  const [selectedPhase, setSelectedPhase] = useState<null | number>(null);
 
-  const categories = [
+  const pdpaPhases = [
     {
-      title: "Data Lifecycle Mapping",
+      step: 1,
+      name: "Compliance Assessment",
+      tag: "Audit & Discovery",
+      activities: "Enterprise-wide review, personal data inventory and classification, data-flow mapping, departmental interviews across HR, finance, IT, marketing, and operations.",
+      deliverables: ["Comprehensive Assessment Report", "Initial Gap Report", "Compliance Scorecard", "Executive Board Presentation"],
       icon: FiLayers,
-      tag: "Governance",
-      content: {
-        problem: "Lack of visibility into how data flows through the organization from collection to destruction.",
-        solution: "Comprehensive mapping of data touchpoints to identify where sensitive information is stored and processed.",
-        deliverables: ["Data Inventory Map", "Data Retention Schedule", "Process Flow Diagrams"]
-      }
     },
     {
-      title: "Privacy-by-Design",
+      step: 2,
+      name: "Gap Analysis & Risk Modeling",
+      tag: "Benchmarking",
+      activities: "Policy, technical-control, third-party vendor risk and governance benchmarking against PDPA 2022 and international GDPR/ISO 27701 standards.",
+      deliverables: ["Detailed Gap Analysis Matrix", "Enterprise Data Risk Register", "Prioritised Remediation Roadmap", "Resource Allocation Plan"],
+      icon: FiAlertTriangle,
+    },
+    {
+      step: 3,
+      name: "Policy & Framework Development",
+      tag: "Documentation",
+      activities: "Drafting compliant internal policies, operational procedures, subject consent forms, privacy notices, and statutory registers tailored to organizational workflow.",
+      deliverables: ["Data Protection & Privacy Policy Pack", "Data Retention & Disposal Schedule", "Incident & Breach Notification Pack", "ROPA & Consent Registers"],
+      icon: FiFileText,
+    },
+    {
+      step: 4,
+      name: "PDPC Statutory Registration",
+      tag: "Regulatory Filing",
+      activities: "Assisting Data Controllers and Data Processors in compiling statutory documentation, appointing/supporting DPO, submitting to PDPC, and audit readiness.",
+      deliverables: ["Data Controller / Processor Filing File", "DPO Designation Formalities", "PDPC Submission Verification", "Readiness Assessment Certificate"],
+      icon: FiShield,
+    },
+    {
+      step: 5,
+      name: "Technical & Operational Rollout",
+      tag: "Implementation",
+      activities: "Deploying governance structures, establishing Data Protection Committees, enforcing technical controls (RBAC, encryption, retention limits), and vendor agreements.",
+      deliverables: ["Rollout Implementation Report", "Control Verification Matrix", "Standard Data Protection Clauses (SCCs)", "Third-Party Assessment File"],
       icon: FiSettings,
-      tag: "Architecture",
-      content: {
-        problem: "Systems built without privacy considerations, leading to high-risk data exposures.",
-        solution: "Integrating privacy requirements directly into the software development life cycle (SDLC) and system architecture.",
-        deliverables: ["Privacy Requirement Specs", "System Design Audit", "Security-by-Design Manual"]
-      }
     },
     {
-      title: "Classification Structures",
-      icon: FiShield,
-      tag: "Security",
-      content: {
-        problem: "Treating all data the same, leading to over-protection of public data or under-protection of sensitive data.",
-        solution: "Establishing clear labels (Public, Internal, Confidential, Restricted) and automated classification rules.",
-        deliverables: ["Classification Policy", "Metadata Labeling Guide", "Data Handling Matrix"]
-      }
+      step: 6,
+      name: "Training & Institutional Awareness",
+      tag: "Capacity Building",
+      activities: "Targeted training sessions for board executives, general employees, HR, procurement, legal, and ICT technical operations teams.",
+      deliverables: ["Executive Briefing Packs", "Staff Awareness Modules", "Verifiable Attendance Records", "Training Certificates of Completion"],
+      icon: FiUserCheck,
     },
     {
-      title: "Risk-Based Modeling",
-      icon: FiCheckCircle,
-      tag: "Compliance",
-      content: {
-        problem: "Compliance efforts that focus on checklists rather than actual high-impact organizational risks.",
-        solution: "Quantifying data risks based on impact and likelihood to prioritize compliance engineering efforts.",
-        deliverables: ["Risk Assessment Report", "Impact Analysis (DPIA)", "Mitigation Roadmap"]
-      }
+      step: 7,
+      name: "Monitoring & Annual Assurance",
+      tag: "Continuous Audit",
+      activities: "Quarterly and annual compliance reviews, statutory DPIA audits for new software/systems, ongoing advisory support, and continuous improvement.",
+      deliverables: ["Quarterly Compliance Review", "Annual Statutory Audit Report", "Ad-hoc DPIA Evaluation Records", "Updated Risk & ROPA Registers"],
+      icon: FiActivity,
     },
-    {
-      title: "Encryption Frameworks",
-      icon: FiShield,
-      tag: "Infrastructure",
-      content: {
-        problem: "Unauthorized internal access to personal data due to weak privilege management.",
-        solution: "Implementing Role-Based Access Control (RBAC) and end-to-end encryption for sensitive data fields.",
-        deliverables: ["Encryption Standards", "IAM Policy Review", "Key Management Protocol"]
-      }
-    },
+  ];
+
+  const gapAreas = [
+    { area: "Governance", issue: "No Data Protection Officer (DPO) appointed, weak accountability, no compliance committee." },
+    { area: "Policies & Procedures", issue: "Missing, outdated or unapproved data privacy policies; lack of clear staff directives." },
+    { area: "Data Processing", issue: "Unknown cross-border data flows, uncontrolled processing, missing Record of Processing Activities (ROPA)." },
+    { area: "Security Controls", issue: "Weak password policies, shared administrative accounts, unencrypted databases, absence of audit logging." },
+    { area: "Data Subject Rights", issue: "No formal workflows, forms, or timelines for handling access, correction, and deletion requests." },
+    { area: "Third Parties & Processors", issue: "Missing data processing agreements, unvetted cloud suppliers, lack of vendor audit clauses." },
+    { area: "PDPC Registration", issue: "Failure to register with the Personal Data Protection Commission, expired status, or deficient filings." },
   ];
 
   return (
     <div className="bg-white dark:bg-gray-dark font-sans antialiased text-gray-700 dark:text-gray-300">
       <Breadcrumb
-        pageName="Data Protection"
-        description="Structured data protection frameworks designed to safeguard sensitive information while ensuring regulatory alignment."
+        pageName="PDPA Compliance & Data Protection"
+        description="End-to-end Personal Data Protection Act, 2022 (PDPA) advisory, policy formulation, PDPC registration, and technical governance for Tanzanian enterprises."
       />
 
-      {/* === Section: Engineering Problem Space === */}
-      <section className="py-16 md:py-24">
+      {/* === Technical Context === */}
+      <section className="py-16 md:py-20 border-b border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary/30"></div>
-              <img
-                src="/images/data/datas.jpg"
-                alt="Compliance Engineering"
-                className="relative rounded-sm shadow-2xl w-full grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute -bottom-6 -right-6 p-6 bg-primary text-white hidden md:block">
-                <FiShield className="text-3xl mb-2" />
-                <p className="text-[10px] font-bold uppercase tracking-[2px]">Data Integrity</p>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-3">
+                Regulatory Mandate
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-bold text-black dark:text-white leading-tight mb-6">
+                End-to-End PDPA 2022 Compliance & Privacy Governance
+              </h1>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-4">
+                The Personal Data Protection Act, 2022 governs how personal data is collected, processed, stored, shared, and transferred in Tanzania. The Personal Data Protection Commission (PDPC) oversees compliance. Every organisation handling employee, customer, patient, student, supplier, or visitor data—including CCTV, biometrics, websites, mobile apps, and ERP systems—is legally required to comply.
+              </p>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-6">
+                PrimeMatrix provides a complete, turnkey end-to-end solution: from initial discovery audits and statutory PDPC registration to technical controls and annual assurance reviews.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/contact"
+                  className="rounded-sm bg-primary px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:bg-primary/90 transition-all"
+                >
+                  Book PDPA Health Check
+                </Link>
+                <a
+                  href="#seven-phases"
+                  className="rounded-sm border border-gray-300 dark:border-gray-700 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-black dark:text-white hover:border-primary transition-all"
+                >
+                  View 7-Phase Programme
+                </a>
               </div>
             </div>
-            
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-4">Technical Context</h2>
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black dark:text-white leading-tight">Institutional Data Challenges</h3>
-              <div className="space-y-6 border-l border-gray-100 dark:border-gray-800 pl-8">
-                <div className="flex gap-4">
-                  <FiAlertTriangle className="text-primary text-xl flex-shrink-0 mt-1" />
-                  <p className="text-[14px] leading-relaxed text-body-color italic">
-                    Organizations often process sensitive personal data without structured governance, exposing them to significant regulatory penalties and reputational damage.
+
+            <div className="lg:col-span-5">
+              <div className="bg-gray-50 dark:bg-gray-800/60 p-8 rounded-sm border border-gray-200 dark:border-gray-700 shadow-lg">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-3">
+                  What We Develop For Your Institution
+                </h3>
+                <div className="space-y-4 text-xs">
+                  <div>
+                    <h4 className="font-bold text-primary uppercase text-[11px] mb-1">Corporate Policies</h4>
+                    <p className="text-body-color dark:text-gray-400">Data Protection Policy, Privacy Notices, Information Security Policy, Data Retention Schedule, Access Control Guidelines.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-primary uppercase text-[11px] mb-1">Operating Procedures</h4>
+                    <p className="text-body-color dark:text-gray-400">Consent Management, Data Subject Rights (Access/Deletion), Breach Incident Response, Third-Party Cross-Border Transfer Rules.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-primary uppercase text-[11px] mb-1">Registers & Statutory Forms</h4>
+                    <p className="text-body-color dark:text-gray-400">ROPA, Data Asset Inventory, Risk Register, Consent Register, Breach Log, Vendor Processing Agreements (DPAs).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* === The Seven-Phase PDPA Compliance Programme === */}
+      <section id="seven-phases" className="py-20 bg-gray-50/50 dark:bg-gray-900/20">
+        <div className="container max-w-[1150px]">
+          <div className="text-center max-w-[700px] mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-2">
+              Implementation Roadmap
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white">
+              Seven-Phase PDPA Compliance Programme
+            </h2>
+            <p className="mt-3 text-sm text-body-color dark:text-gray-400">
+              A structured, evidence-backed pathway taking institutions from baseline uncertainty to verified PDPC registration and sustained audit readiness.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pdpaPhases.map((phase, idx) => {
+              const Icon = phase.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  onClick={() => setSelectedPhase(idx)}
+                  className="cursor-pointer bg-white dark:bg-gray-800 p-7 rounded-sm border border-gray-100 dark:border-gray-700 shadow-sm hover:border-primary transition-all group flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="h-8 w-8 rounded bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                        {phase.step}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/5 px-2 py-0.5 rounded">
+                        {phase.tag}
+                      </span>
+                    </div>
+                    <h3 className="text-base font-bold text-black dark:text-white mb-2 group-hover:text-primary transition-colors">
+                      {phase.name}
+                    </h3>
+                    <p className="text-xs text-body-color dark:text-gray-400 leading-relaxed mb-4">
+                      {phase.activities}
+                    </p>
+                  </div>
+                  <div className="border-t border-gray-100 dark:border-gray-700 pt-3">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
+                      <span>View deliverables</span>
+                      <FiArrowRight size={12} />
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* === Typical Gaps We Find and Fix === */}
+      <section className="py-20 border-t border-gray-100 dark:border-gray-800">
+        <div className="container max-w-[1150px]">
+          <div className="mb-12 border-l-4 border-primary pl-5">
+            <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-2">Audit Diagnostic</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white">
+              Typical Compliance Gaps We Find and Remediate
+            </h2>
+            <p className="mt-2 text-sm text-body-color dark:text-gray-300 max-w-[780px]">
+              Our audits regularly discover critical exposures before regulatory authorities or breach events occur.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {gapAreas.map((item, gIdx) => (
+              <div
+                key={gIdx}
+                className="p-5 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-sm shadow-xs flex items-start gap-4"
+              >
+                <div className="h-8 w-8 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <FiAlertTriangle size={16} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-black dark:text-white mb-1">
+                    {item.area}
+                  </h4>
+                  <p className="text-xs text-body-color dark:text-gray-400 leading-relaxed">
+                    {item.issue}
                   </p>
                 </div>
-                <p className="text-[14px] leading-relaxed opacity-85">
-                  Primematrix addresses these gaps by designing frameworks that embed compliance directly into system architecture, ensuring lawful and secure processing.
-                </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* === Section: The Engineering Grid === */}
-      <section className="py-20 bg-gray-50/50 dark:bg-gray-900/10 border-y border-gray-100 dark:border-gray-800">
-        <div className="container max-w-[1150px]">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <div className="max-w-xl">
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-2">Capabilities</h2>
-              <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white uppercase tracking-tight">Compliance Methodology</h3>
-            </div>
-            <div className="hidden md:block h-[1px] flex-grow bg-gray-200 dark:bg-gray-800 mx-8 mb-3"></div>
-            <p className="text-[11px] font-bold uppercase text-body-color tracking-widest italic">Confidential Technical Output</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {categories.map((cat, idx) => (
-              <motion.div
-                key={idx}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                onClick={() => setSelectedCategory(idx)}
-                className="cursor-pointer bg-white dark:bg-gray-800 p-10 border border-gray-100 dark:border-gray-800 hover:z-10 hover:border-primary transition-all group relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                   <FiActivity className="text-primary" />
-                </div>
-                <p className="text-[10px] font-bold text-primary uppercase tracking-[2px] mb-4">{cat.tag}</p>
-                <h4 className="text-[15px] font-bold text-black dark:text-white mb-4 leading-tight group-hover:text-primary transition-colors">{cat.title}</h4>
-                <div className="w-8 h-[2px] bg-gray-200 group-hover:w-full group-hover:bg-primary transition-all duration-500"></div>
-              </motion.div>
             ))}
           </div>
+
+          {/* Value Proposition Callout from Page 25 */}
+          <div className="mt-12 p-8 bg-primary/5 dark:bg-primary/10 rounded-sm border border-primary/20 text-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+              Our Value Proposition
+            </h3>
+            <p className="text-sm md:text-base font-medium text-black dark:text-white max-w-[850px] mx-auto leading-relaxed">
+              &ldquo;We evaluate risks. We identify compliance gaps. We develop governance frameworks. We implement technical controls. We train staff. We support registration. We monitor compliance, and move organisations from uncertainty to full compliance.&rdquo;
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* === Technical Blueprint Modal === */}
+      {/* === Technical Deliverables Modal === */}
       <AnimatePresence>
-        {selectedCategory !== null && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+        {selectedPhase !== null && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="bg-white dark:bg-gray-dark w-full max-w-2xl rounded-sm border-t-4 border-primary shadow-2xl"
+              className="bg-white dark:bg-gray-dark w-full max-w-xl rounded-sm border-t-4 border-primary shadow-2xl overflow-hidden"
             >
-              <div className="p-8 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
+              <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
                 <div>
-                  <div className="flex items-center gap-2 mb-2 text-primary">
-                    {React.createElement(categories[selectedCategory].icon, { className: "text-xl" })}
-                    <span className="text-[10px] font-bold uppercase tracking-[3px]">{categories[selectedCategory].tag}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-tight">{categories[selectedCategory].title}</h3>
+                  <span className="text-[10px] font-bold uppercase tracking-[2px] text-primary">
+                    Phase {pdpaPhases[selectedPhase].step} • {pdpaPhases[selectedPhase].tag}
+                  </span>
+                  <h3 className="text-lg font-bold text-black dark:text-white uppercase tracking-tight">
+                    {pdpaPhases[selectedPhase].name}
+                  </h3>
                 </div>
-                <button onClick={() => setSelectedCategory(null)} className="text-body-color hover:text-primary transition-colors">
-                  <FiX size={24} />
+                <button
+                  onClick={() => setSelectedPhase(null)}
+                  className="text-body-color hover:text-primary transition-colors"
+                >
+                  <FiX size={22} />
                 </button>
               </div>
 
-              <div className="p-8 space-y-10">
-                <div className="grid md:grid-cols-2 gap-10">
-                  <div>
-                    <h4 className="text-[11px] font-bold uppercase text-primary tracking-widest mb-3">Organizational Risk</h4>
-                    <p className="text-[13px] leading-relaxed opacity-80">{categories[selectedCategory].content.problem}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-[11px] font-bold uppercase text-primary tracking-widest mb-3">Compliance Strategy</h4>
-                    <p className="text-[13px] leading-relaxed opacity-80">{categories[selectedCategory].content.solution}</p>
-                  </div>
+              <div className="p-6 space-y-6">
+                <div>
+                  <h4 className="text-[11px] font-bold uppercase text-primary tracking-widest mb-2">
+                    Key Activities
+                  </h4>
+                  <p className="text-xs leading-relaxed text-body-color dark:text-gray-300">
+                    {pdpaPhases[selectedPhase].activities}
+                  </p>
                 </div>
 
-                <div className="bg-gray-50 dark:bg-gray-900/50 p-6 border-l-2 border-primary">
-                  <h4 className="text-[11px] font-bold uppercase text-black dark:text-white tracking-widest mb-4">Technical Deliverables</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {categories[selectedCategory].content.deliverables.map((item, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <FiCheckCircle className="text-primary text-[14px]" />
-                        <span className="text-[12px] font-medium">{item}</span>
+                <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded border border-gray-100 dark:border-gray-700">
+                  <h4 className="text-[11px] font-bold uppercase text-black dark:text-white tracking-widest mb-3">
+                    Statutory Deliverables
+                  </h4>
+                  <div className="space-y-2">
+                    {pdpaPhases[selectedPhase].deliverables.map((item, dIdx) => (
+                      <div key={dIdx} className="flex items-center gap-2.5 text-xs text-body-color dark:text-gray-300">
+                        <FiCheckCircle className="text-primary flex-shrink-0" size={14} />
+                        <span>{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 border-t border-gray-100 dark:border-gray-800 flex justify-end bg-gray-50/50 dark:bg-gray-900/30">
-                <button 
-                  onClick={() => setSelectedCategory(null)} 
-                  className="px-8 py-3 bg-primary text-white text-[10px] font-bold uppercase tracking-[2px] shadow-lg hover:shadow-primary/20 transition-all"
+              <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex justify-end bg-gray-50/50 dark:bg-gray-800/20">
+                <button
+                  onClick={() => setSelectedPhase(null)}
+                  className="px-6 py-2.5 bg-primary text-white text-[11px] font-bold uppercase tracking-wider rounded-sm hover:bg-primary/90 transition-all"
                 >
-                  Terminate Review
+                  Close
                 </button>
               </div>
             </motion.div>

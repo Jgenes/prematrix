@@ -32,23 +32,23 @@ const AboutSectionOne = () => {
               <div className="max-w-[540px]">
                 {/* Forced Small Heading for Research Look */}
                 <h2 className="mb-4 text-xs font-bold uppercase tracking-[3px] text-primary">
-                  Corporate Strategy
+                  Company Profile
                 </h2>
                 <h3 className="mb-4 text-xl font-bold leading-tight text-black dark:text-white sm:text-2xl">
-                  Why Primematrix
+                  Engineering with accountability
                 </h3>
                 <p className="mb-8 text-[14px] leading-relaxed text-body-color dark:text-body-color-dark opacity-80">
-                  Primematrix differentiates itself through structured technical governance and operational accountability, 
-                  aligning every deployment with enterprise-grade security benchmarks.
+                  PrimeMatrix combines local context with enterprise engineering discipline. We work with
+                  organizations that need technology they can trust, explain, and operate over the long term.
                 </p>
 
                 <div className="mb-10 grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
-                  <List text="Architecture-First" />
-                  <List text="Embedded Compliance" />
-                  <List text="SaaS Governance" />
-                  <List text="Security Standards" />
-                  <List text="Technical Reporting" />
-                  <List text="Risk Mitigation" />
+                  <List text="Security-led delivery" />
+                  <List text="Tanzania-focused expertise" />
+                  <List text="Clear technical governance" />
+                  <List text="Practical compliance" />
+                  <List text="Reliable operations" />
+                  <List text="Long-term partnership" />
                 </div>
 
                 {/* Stats Counters - Compact Insight Design */}

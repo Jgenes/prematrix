@@ -2,7 +2,21 @@
 
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { motion } from "framer-motion";
-import { FiShield, FiSettings, FiLayers, FiDatabase, FiBookOpen, FiBriefcase, FiUsers, FiCheck, FiActivity } from "react-icons/fi";
+import Link from "next/link";
+import {
+  FiShield,
+  FiSettings,
+  FiLayers,
+  FiDatabase,
+  FiCheck,
+  FiActivity,
+  FiFileText,
+  FiAward,
+  FiPhone,
+  FiMail,
+  FiMapPin,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,87 +24,176 @@ const fadeUp = {
 };
 
 const AboutPage = () => {
-  // Data definitions remain same as your original code
-  const corePrinciples = [
-    { icon: FiShield, title: "Security-First Engineering", desc: "All digital systems are architected with multi-layered protection from inception, ensuring maximum resilience against cyber threats." },
-    { icon: FiSettings, title: "Compliance-Integrated Architecture", desc: "Regulatory, governance, and industry standards are embedded into every stage of system design and implementation." },
-    { icon: FiLayers, title: "Operational Sustainability", desc: "Systems are engineered for long-term performance, continuous monitoring, and controlled scalability." },
+  const coreValues = [
+    {
+      title: "Integrity",
+      desc: "Transparent pricing, honest advice, and confidentiality by default across every engagement.",
+    },
+    {
+      title: "Excellence",
+      desc: "International engineering and compliance standards applied with deep local Tanzanian context.",
+    },
+    {
+      title: "Security First",
+      desc: "Security and data privacy engineered in from the ground up, never bolted on as an afterthought.",
+    },
+    {
+      title: "Accountability",
+      desc: "Clear system owners, measurable SLAs, and disciplined delivery we proudly stand behind.",
+    },
+    {
+      title: "Partnership",
+      desc: "We work as an accountable extension of the client's own internal technology and compliance teams.",
+    },
+    {
+      title: "Local Empowerment",
+      desc: "Systematic skills transfer, local hiring, and community-minded economic growth for Tanzanian youth.",
+    },
   ];
 
-  const integratedServices = [
-    { icon: FiDatabase, title: "Data Protection & Privacy Governance" },
-    { icon: FiShield, title: "Cybersecurity Architecture & Monitoring" },
-    { icon: FiSettings, title: "Software & Platform Engineering" },
-    { icon: FiBriefcase, title: "Fintech System Development" },
-    { icon: FiBookOpen, title: "ICT Project Design & Operational Management" },
-    { icon: FiUsers, title: "Digital Training Ecosystem Deployment" },
+  const corporateLicences = [
+    {
+      business: "ICT Consultancy (Local)",
+      issuer: "Ubungo Municipal Council",
+      licenceNo: "BL01396922025-2605180752",
+      issued: "05 Feb 2026",
+      expires: "04 Feb 2027",
+      scope: "ICT strategy, cybersecurity & PDPA compliance advisory, architecture, audits, PMO & training.",
+    },
+    {
+      business: "Online Marketing & Sales",
+      issuer: "BRELA",
+      licenceNo: "20000107279",
+      issued: "07 Feb 2026",
+      expires: "06 Feb 2027",
+      scope: "Digital platforms, web and e-commerce solutions, online sales and marketing enablement.",
+    },
+    {
+      business: "Supply of ICT Equipment",
+      issuer: "Ubungo Municipal Council",
+      licenceNo: "BL01396922025-2605186576",
+      issued: "16 Apr 2026",
+      expires: "15 Apr 2027",
+      scope: "Servers, networking, CCTV, access control, backup systems, drones and ICT hardware supply.",
+    },
   ];
 
-  const leadership = [
-    { title: "Managing Director", desc: "Drives corporate strategy, governance, and organizational leadership, ensuring alignment with business objectives." },
-    { title: "Chief Technology Officer", desc: "Leads innovation, system architecture, and cybersecurity strategy to deliver next-generation solutions." },
-    { title: "Data Protection Officer", desc: "Oversees compliance with data protection laws and regulatory obligations, safeguarding client information." },
-    { title: "Platform Operations Lead", desc: "Manages software ecosystems, cloud infrastructure, and ensures platform reliability and scalability." },
+  const professionalCredentials = [
+    { domain: "Security & Auditing", certs: "CISSP, CISM, CISA, CEH, OSCP" },
+    { domain: "Cloud & Infrastructure", certs: "CCNP, VCP, AWS Certified, Microsoft Azure" },
+    { domain: "Project & Governance", certs: "PMP, PRINCE2, ITIL 4, COBIT, ISO 27001 Lead Auditor" },
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-dark font-sans antialiased">
+    <div className="bg-white dark:bg-gray-dark font-sans antialiased text-gray-700 dark:text-gray-300">
       <Breadcrumb
-        pageName="Institutional Profile"
-        description="Primematrix Tanzania Limited is a specialized digital engineering and compliance technology firm delivering structured, secure, and scalable solutions for regulated organizations."
+        pageName="About PrimeMatrix"
+        description="PrimeMatrix Tanzania Company Limited is a duly incorporated, licensed, and tax-registered ICT company delivering infrastructure, cybersecurity, data protection, software, and mining technology across Tanzania."
       />
 
-      {/* === Section: Core Operating Philosophy (High Density Grid) === */}
-      <section className="py-16 md:py-24">
+      {/* === Executive Overview === */}
+      <section className="py-16 md:py-20 border-b border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
-          <div className="mb-12 border-l-4 border-primary pl-5">
-            <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-2">Philosophy</h2>
-            <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white">Core Operating Principles</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {corePrinciples.map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                className="group rounded-sm border border-gray-100 dark:border-gray-800 p-8 transition-all hover:shadow-md"
-              >
-                <item.icon className="text-primary text-2xl mb-5" />
-                <h4 className="text-[15px] font-bold uppercase tracking-tight mb-3 text-black dark:text-white">{item.title}</h4>
-                <p className="text-[13.5px] leading-relaxed text-body-color opacity-85">{item.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-3">
+                Corporate Identity
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-bold text-black dark:text-white leading-tight mb-6">
+                Engineering Secure Digital Systems Across the Full Lifecycle
+              </h1>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-4">
+                PrimeMatrix Tanzania Company Limited is a professional data protection, cybersecurity, ICT consulting, and digital transformation company. We deliver enterprise-grade infrastructure, security, compliance, and software engineering aligned with Tanzanian and international standards across the full lifecycle: <strong>advise, design, build, secure, and operate</strong>.
+              </p>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-6">
+                Our name reflects our approach: a matrix connects many dimensions in one structure. We connect infrastructure, security, software, compliance, and project governance so technology decisions are made once, coherently, and delivered without the gaps that appear when work is split across many disconnected vendors.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-sm bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 text-center">
+                <div>
+                  <h3 className="text-xl font-bold text-primary">99.9%</h3>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400">Uptime Reliability</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-black dark:text-white">24/7</h3>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400">Active Monitoring</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-black dark:text-white">15+</h3>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400">Sectors Served</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-primary">ISO</h3>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-body-color dark:text-gray-400">Aligned Operations</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Managing Director Note Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-white dark:bg-gray-800 p-8 rounded-sm border-l-4 border-primary border-y border-r border-gray-200 dark:border-gray-700 shadow-xl">
+                <span className="text-[10px] font-bold uppercase tracking-[3px] text-primary block mb-2">
+                  Executive Statement
+                </span>
+                <h3 className="text-lg font-bold text-black dark:text-white mb-4">
+                  A Note from the Managing Director
+                </h3>
+                <blockquote className="text-xs md:text-sm italic leading-relaxed text-body-color dark:text-gray-300 mb-6">
+                  &ldquo;Tanzania&apos;s economy is going digital at speed: instant payments, mobile money, open APIs, cloud adoption and a rising regulatory bar for security and data protection, including the Personal Data Protection Act, 2022. Institutions need a partner who can design, build, secure and run technology, and prove compliance while doing it. PrimeMatrix was created for exactly that. We bring engineering depth, regulatory fluency and disciplined delivery under one roof, so our clients can focus on their customers.&rdquo;
+                </blockquote>
+                <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-black dark:text-white">
+                    Samwel Phillip Madauda
+                  </h4>
+                  <p className="text-[11px] text-primary font-medium">Managing Director, PrimeMatrix Tanzania Co. Ltd</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* === Section: Vision & Mission (Split Technical Layout) === */}
-      <section className="py-16 bg-gray-50/50 dark:bg-gray-900/20">
+      {/* === Vision, Mission & Core Values === */}
+      <section className="py-20 bg-gray-50/50 dark:bg-gray-900/20">
         <div className="container max-w-[1150px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-4">Strategic Intent</h2>
-              <h3 className="text-xl md:text-2xl font-bold mb-6 text-black dark:text-white">Mission & Vision</h3>
-              <div className="space-y-8">
-                <div className="relative pl-8 border-l border-gray-200 dark:border-gray-800">
-                   <span className="absolute left-[-5px] top-0 h-2 w-2 rounded-full bg-primary"></span>
-                   <h4 className="text-[13px] font-bold uppercase text-primary mb-2">Vision Statement</h4>
-                   <p className="text-[14px] italic text-body-color leading-relaxed">"To become the leading authority in digital engineering, cybersecurity, and compliance technology across Tanzania and East Africa."</p>
-                </div>
-                <div className="relative pl-8 border-l border-gray-200 dark:border-gray-800">
-                   <span className="absolute left-[-5px] top-0 h-2 w-2 rounded-full bg-primary"></span>
-                   <h4 className="text-[13px] font-bold uppercase text-primary mb-2">Mission Statement</h4>
-                   <p className="text-[14px] text-body-color leading-relaxed">To design, secure, and manage reliable digital systems that support institutional growth, maintain regulatory compliance, and uphold technical excellence.</p>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-sm border-t-4 border-primary border-x border-b border-gray-100 dark:border-gray-700 shadow-sm">
+              <span className="text-xs font-bold uppercase tracking-[3px] text-primary block mb-2">Our Vision</span>
+              <h3 className="text-xl font-bold text-black dark:text-white mb-4">East Africa&apos;s Most Trusted ICT Partner</h3>
+              <p className="text-sm italic leading-relaxed text-body-color dark:text-gray-300">
+                &ldquo;To be East Africa&apos;s most trusted ICT partner, known for secure, reliable and compliant digital systems that power national growth.&rdquo;
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {integratedServices.map((service, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-sm bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700 shadow-sm">
-                  <FiActivity className="text-primary flex-shrink-0" />
-                  <span className="text-[11px] font-bold uppercase tracking-wide text-black dark:text-white">{service.title}</span>
+
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-sm border-t-4 border-black dark:border-white border-x border-b border-gray-100 dark:border-gray-700 shadow-sm">
+              <span className="text-xs font-bold uppercase tracking-[3px] text-primary block mb-2">Our Mission</span>
+              <h3 className="text-xl font-bold text-black dark:text-white mb-4">Engineering Excellence & Accountable Delivery</h3>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300">
+                &ldquo;To design, build and protect mission-critical technology for Tanzanian institutions through engineering excellence, local regulatory expertise and accountable delivery.&rdquo;
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-center max-w-[600px] mx-auto mb-12">
+              <span className="text-xs font-bold uppercase tracking-[3px] text-primary block mb-2">Our Foundation</span>
+              <h3 className="text-2xl font-bold text-black dark:text-white">Six Core Values</h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {coreValues.map((val, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white dark:bg-gray-800 p-6 rounded-sm border border-gray-100 dark:border-gray-700 shadow-xs hover:border-primary transition-all"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white">
+                      {val.title}
+                    </h4>
+                  </div>
+                  <p className="text-xs leading-relaxed text-body-color dark:text-gray-400">
+                    {val.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -98,35 +201,147 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* === Section: Leadership (Clean Technical Cards) === */}
-      <section className="py-20">
+      {/* === Section 02: Corporate Profile & Regulatory Standing === */}
+      <section id="corporate-standing" className="py-20 border-t border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
-          <div className="text-center mb-16">
-            <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-3">Governance</h2>
-            <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white">Leadership Structure</h3>
+          <div className="mb-14 border-l-4 border-primary pl-5">
+            <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-2">Regulatory Compliance</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white">
+              Corporate Profile & Regulatory Standing
+            </h2>
+            <p className="mt-2 text-sm text-body-color dark:text-gray-300 max-w-[800px]">
+              PrimeMatrix Tanzania Company Limited is a duly incorporated, tax-registered, and licensed Tanzanian company. Institutions that engage us can verify our legal standing directly from the statutory registration documents summarised below.
+            </p>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {leadership.map((leader, idx) => (
-              <div key={idx} className="border-t-2 border-primary pt-6">
-                <h4 className="text-[14px] font-bold text-black dark:text-white mb-2 uppercase">{leader.title}</h4>
-                <p className="text-[12.5px] leading-relaxed text-body-color opacity-80">{leader.desc}</p>
+
+          {/* Registration Details Table */}
+          <div className="mb-12 overflow-x-auto rounded-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+            <table className="w-full text-left text-xs md:text-sm">
+              <thead className="bg-gray-100 dark:bg-gray-900/50 text-black dark:text-white uppercase font-bold text-[11px] tracking-wider border-b border-gray-200 dark:border-gray-700">
+                <tr>
+                  <th className="py-3 px-6 w-1/3">Corporate Item</th>
+                  <th className="py-3 px-6 w-2/3">Official Statutory Detail</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Registered Legal Name</td>
+                  <td className="py-3 px-6 font-semibold text-primary">PRIMEMATRIX TANZANIA COMPANY LIMITED</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Legal Status</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">Limited liability company incorporated under the Companies Act, 2002 (Section 15)</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Certificate of Incorporation</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">
+                    <strong className="text-black dark:text-white">No. 193286410</strong>, issued 27 January 2026 by Registrar of Companies (BRELA)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Tax Registration (TRA)</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">
+                    <strong className="text-black dark:text-white">TIN 193-286-410</strong>, effective 27 January 2026 | Kimara Tax Office, Kinondoni
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">TRA Physical Location</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">Plot No. 443, Block Q9, Kinondoni, Dar es Salaam</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Licensed Principal Place of Business</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">
+                    Morogoro Road, Kibamba Ward, Ubungo Municipal Council, Dar es Salaam | P. O. Box 22678
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-6 font-bold text-black dark:text-white">Official Telephone & Contacts</td>
+                  <td className="py-3 px-6 text-body-color dark:text-gray-300">
+                    +255 783 700 007 | +255 767 159 898 | info@primematrix.co.tz | primematrix.co.tz
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Business Licences Grid */}
+          <h3 className="text-xs font-bold uppercase tracking-widest text-black dark:text-white mb-6">
+            Official Business Licences (Issued under Business Licensing Act, No. 25 of 1972)
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {corporateLicences.map((licence, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-gray-800 p-6 rounded-sm border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded">
+                      Active Licence
+                    </span>
+                    <span className="text-[11px] text-body-color dark:text-gray-400">Exp: {licence.expires}</span>
+                  </div>
+                  <h4 className="text-sm font-bold uppercase tracking-wide text-black dark:text-white mb-2">
+                    {licence.business}
+                  </h4>
+                  <p className="text-xs text-body-color dark:text-gray-400 mb-4">
+                    <strong>Issuing Office:</strong> {licence.issuer}<br />
+                    <strong>Licence No:</strong> <span className="font-mono text-black dark:text-white">{licence.licenceNo}</span>
+                  </p>
+                </div>
+                <div className="border-t border-gray-100 dark:border-gray-700 pt-3">
+                  <p className="text-[11px] leading-relaxed text-body-color dark:text-gray-400">
+                    <strong className="text-black dark:text-white">Permitted Scope:</strong> {licence.scope}
+                  </p>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Team Credentials */}
+          <div className="p-8 rounded-sm bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
+            <div className="mb-6">
+              <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-1">Human Capital</span>
+              <h3 className="text-lg font-bold text-black dark:text-white">Staff Professional Certifications & Standards</h3>
+              <p className="text-xs text-body-color dark:text-gray-400 mt-1">
+                Our engineers and consultants hold internationally recognized certifications aligned with ITIL, PMI, COBIT, NIST, and ISO standards.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {professionalCredentials.map((cred, cIdx) => (
+                <div key={cIdx} className="bg-white dark:bg-gray-800 p-5 rounded-sm border border-gray-100 dark:border-gray-700">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-2">{cred.domain}</h4>
+                  <p className="text-xs font-semibold text-black dark:text-white leading-relaxed">{cred.certs}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* === Institutional Statement (Minimalist Footer) === */}
-      <section className="py-16 border-t border-gray-100 dark:border-gray-800">
-        <div className="container max-w-[800px] text-center">
-          <p className="text-[15px] font-medium leading-relaxed text-black dark:text-white opacity-90 italic">
-            "Primematrix Tanzania Limited is committed to building trustworthy digital infrastructures that enable organizations to operate securely in modern technological environments."
+      {/* === Action CTA === */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container max-w-[900px] text-center">
+          <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">
+            Partner with an Accountable Tanzanian ICT Leader
+          </h2>
+          <p className="text-sm leading-relaxed text-white/90 mb-8 max-w-[700px] mx-auto">
+            Whether preparing for a PDPA audit, upgrading core banking switch infrastructure, or deploying pre-entry safety inspection drones to a mine site, PrimeMatrix delivers regulator-ready excellence.
           </p>
-          <div className="mt-6 flex justify-center gap-4">
-             <div className="h-[1px] w-12 bg-primary self-center"></div>
-             <span className="text-[10px] font-bold uppercase tracking-[3px]">Official Corporate Mandate</span>
-             <div className="h-[1px] w-12 bg-primary self-center"></div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact"
+              className="rounded-sm bg-white px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-primary hover:bg-gray-100 transition-all shadow-lg"
+            >
+              Book Readiness Discussion
+            </Link>
+            <Link
+              href="/mining"
+              className="rounded-sm border border-white px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/10 transition-all"
+            >
+              Explore Mining Solutions
+            </Link>
           </div>
         </div>
       </section>

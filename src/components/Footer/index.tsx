@@ -5,34 +5,40 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <>
-      <footer className="relative z-10 bg-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24 font-sans antialiased">
+      <footer className="relative z-10 bg-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24 font-sans antialiased border-t border-gray-100 dark:border-gray-800">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             {/* Branding & Socials */}
-            <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
+            <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-4/12">
               <div className="mb-12 max-w-[360px] lg:mb-16">
-                <Link href="/" className="mb-8 inline-block">
+                <Link href="/" className="mb-6 inline-block">
                   <Image
                     src="/images/logo/logo.png"
-                    alt="Primematrix"
-                    width={120}
-                    height={30}
-                    className="dark:hidden w-auto h-8"
+                    alt="PrimeMatrix Tanzania"
+                    width={140}
+                    height={35}
+                    className="dark:hidden w-auto h-9"
                   />
                   <Image
                     src="/images/logo/logo.png"
-                    alt="Primematrix"
-                    width={120}
-                    height={30}
-                    className="hidden w-auto h-8 dark:block"
+                    alt="PrimeMatrix Tanzania"
+                    width={140}
+                    height={35}
+                    className="hidden w-auto h-9 dark:block"
                   />
                 </Link>
-                <p className="mb-9 text-[13px] leading-relaxed text-body-color dark:text-body-color-dark">
-                  High-performance digital solutions focusing on enterprise architectures, 
-                  educational management systems, and logistics optimization for the Tanzanian market.
+                <p className="mb-4 text-[13px] leading-relaxed text-body-color dark:text-body-color-dark">
+                  PrimeMatrix Tanzania Company Limited delivers integrated ICT infrastructure, 
+                  cybersecurity, data-protection compliance, fintech software, and mining 
+                  technology for banks, mobile network operators, government, and enterprise.
                 </p>
+                <div className="text-[11px] font-medium text-body-color dark:text-body-color-dark space-y-1 mb-6">
+                  <p><span className="font-bold text-black dark:text-white">BRELA Reg:</span> 193286410</p>
+                  <p><span className="font-bold text-black dark:text-white">TRA TIN:</span> 193-286-410</p>
+                  <p><span className="font-bold text-black dark:text-white">Incorporated:</span> 27 January 2026</p>
+                </div>
                 
-                {/* Social Media Icons with X Added */}
+                {/* Social Media Icons */}
                 <div className="flex items-center space-x-5">
                   {[
                     { label: "X", path: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153ZM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644Z" },
@@ -55,20 +61,28 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Quick Navigation */}
-            <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
+            {/* Core Capability Pillars */}
+            <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
               <div className="mb-12 lg:mb-16">
-                <h2 className="mb-10 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                  Quick Links
+                <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                  Capability Pillars
                 </h2>
-                <ul className="space-y-4">
-                  {["Home", "About", "Services", "Contact"].map((item) => (
-                    <li key={item}>
+                <ul className="space-y-3">
+                  {[
+                    { name: "Mining Tech & Drones", href: "/mining" },
+                    { name: "Infrastructure & Networks", href: "/engineering" },
+                    { name: "Cybersecurity & Forensics", href: "/cyber" },
+                    { name: "PDPA Compliance 2022", href: "/data" },
+                    { name: "Software & Digital Banking", href: "/software" },
+                    { name: "Platform & Managed SLAs", href: "/platform" },
+                    { name: "Fintech Systems", href: "/fintech" },
+                  ].map((item) => (
+                    <li key={item.name}>
                       <Link
-                        href={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
-                        className="text-[11px] font-bold uppercase tracking-wider text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                        href={item.href}
+                        className="text-[12px] font-medium text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                       >
-                        {item}
+                        {item.name}
                       </Link>
                     </li>
                   ))}
@@ -76,20 +90,26 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Legal Section */}
+            {/* Quick Links & Corporate */}
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
-                <h2 className="mb-10 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                  Legal
+                <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                  Corporate
                 </h2>
-                <ul className="space-y-4">
-                  {["TOS", "Privacy Policy"].map((item) => (
-                    <li key={item}>
+                <ul className="space-y-3">
+                  {[
+                    { name: "About PrimeMatrix", href: "/about" },
+                    { name: "Corporate Standing", href: "/about#corporate-standing" },
+                    { name: "Training Academy", href: "/training" },
+                    { name: "Research & Insights", href: "/insights" },
+                    { name: "Contact & Support", href: "/contact" },
+                  ].map((item) => (
+                    <li key={item.name}>
                       <Link
-                        href="#"
-                        className="text-[11px] font-bold uppercase tracking-wider text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                        href={item.href}
+                        className="text-[12px] font-medium text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                       >
-                        {item}
+                        {item.name}
                       </Link>
                     </li>
                   ))}
@@ -98,29 +118,31 @@ const Footer = () => {
             </div>
 
             {/* Contact Details */}
-            <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
+            <div className="w-full px-4 md:w-1/2 lg:w-3/12 xl:w-3/12">
               <div className="mb-12 lg:mb-16">
-                <h2 className="mb-10 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                  Get In Touch
+                <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                  Head Office
                 </h2>
-                <div className="space-y-5">
+                <div className="space-y-4">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Office Address</p>
-                    <p className="text-[12px] text-body-color dark:text-body-color-dark">
-                      P.O.BOX 81<br />
-                      Dar es Salaam, Tanzania
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Location</p>
+                    <p className="text-[12px] text-body-color dark:text-body-color-dark leading-relaxed">
+                      Morogoro Road, Kibamba Ward,<br />
+                      Ubungo Municipal Council,<br />
+                      P. O. Box 22678, Dar es Salaam, Tanzania
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Phone Number</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Telephone</p>
                     <p className="text-[12px] text-body-color dark:text-body-color-dark">
-                      +255 700 000 000
+                      <a href="tel:+255783700007" className="hover:text-primary transition-colors">+255 783 700 007</a><br />
+                      <a href="tel:+255767159898" className="hover:text-primary transition-colors">+255 767 159 898</a>
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Email Address</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-dark dark:text-white mb-1">Email</p>
                     <p className="text-[12px] text-body-color dark:text-body-color-dark">
-                      info@primematrix.co.tz
+                      <a href="mailto:info@primematrix.co.tz" className="hover:text-primary transition-colors">info@primematrix.co.tz</a>
                     </p>
                   </div>
                 </div>
@@ -130,9 +152,12 @@ const Footer = () => {
 
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D2D8E183] to-transparent dark:via-[#959CB183]"></div>
           
-          <div className="py-8">
-            <p className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-body-color dark:text-white">
-              © {new Date().getFullYear()} Primematrix Solutions. All rights reserved.
+          <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-center sm:text-left text-[11px] font-medium tracking-wide text-body-color dark:text-white/80">
+              © 2026 PrimeMatrix Tanzania Company Limited. All rights reserved. | TIN 193-286-410 | BRELA 193286410
+            </p>
+            <p className="text-center sm:text-right text-[11px] font-semibold text-primary tracking-widest uppercase">
+              Secure. Compliant. Scalable.
             </p>
           </div>
         </div>
