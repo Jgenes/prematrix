@@ -1,9 +1,73 @@
 "use client";
 
+import React, { useState } from "react";
 import NewsLatterBox from "./NewsLatterBox";
-import { FiMail, FiMapPin, FiClock, FiPhone, FiFileText, FiShield, FiCpu, FiCheckCircle } from "react-icons/fi";
+import { FiMail, FiMapPin, FiClock, FiPhone, FiFileText, FiShield, FiCpu, FiCheckCircle, FiLoader } from "react-icons/fi";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    organization: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({
+    type: null,
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit inquiry.");
+      }
+
+      setStatus({
+        type: "success",
+        message: "Thank you! Your inquiry has been sent to info@primematrix.co.tz. Our team will review and respond promptly.",
+      });
+
+      setFormData({
+        name: "",
+        organization: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        message: err.message || "Something went wrong. Please try again or call us directly.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const waysToBegin = [
     {
       title: "PDPA & Security Health Check",
@@ -83,18 +147,34 @@ const Contact = () => {
                 Institutional Support & Tendering
               </h2>
               <p className="mb-8 text-xs md:text-sm font-medium text-body-color dark:text-gray-400 leading-relaxed">
-                Submit an RFP, prequalification enquiry, or technical support request. Our team will review your requirements and respond promptly.
+                Submit an RFP, prequalification enquiry, or technical support request. Your message will be sent directly to <strong>info@primematrix.co.tz</strong>.
               </p>
+
+              {status.type === "success" && (
+                <div className="mb-6 p-4 rounded-sm bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400 text-xs md:text-sm">
+                  {status.message}
+                </div>
+              )}
+
+              {status.type === "error" && (
+                <div className="mb-6 p-4 rounded-sm bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs md:text-sm">
+                  {status.message}
+                </div>
+              )}
               
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={handleSubmit}>
                 <div className="-mx-4 flex flex-wrap">
                   <div className="w-full px-4 md:w-1/2">
                     <div className="mb-6">
                       <label className="mb-2 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
-                        Full Name / Contact Person
+                        Full Name / Contact Person *
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="e.g., Juma Ally"
                         className="w-full rounded-sm border border-stroke bg-[#f8f8f8] px-5 py-3 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
                       />
@@ -108,6 +188,9 @@ const Contact = () => {
                       </label>
                       <input
                         type="text"
+                        name="organization"
+                        value={formData.organization}
+                        onChange={handleChange}
                         placeholder="e.g., Commercial Bank, Mining Site"
                         className="w-full rounded-sm border border-stroke bg-[#f8f8f8] px-5 py-3 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
                       />
@@ -117,11 +200,15 @@ const Contact = () => {
                   <div className="w-full px-4 md:w-1/2">
                     <div className="mb-6">
                       <label className="mb-2 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
-                        Official Email Address
+                        Official Email Address *
                       </label>
                       <input
                         type="email"
-                        placeholder="info@institution.co.tz"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="e.g., yourname@institution.co.tz"
                         className="w-full rounded-sm border border-stroke bg-[#f8f8f8] px-5 py-3 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
                       />
                     </div>
@@ -134,6 +221,9 @@ const Contact = () => {
                       </label>
                       <input
                         type="text"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         placeholder="+255 7XX XXX XXX"
                         className="w-full rounded-sm border border-stroke bg-[#f8f8f8] px-5 py-3 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
                       />
@@ -143,11 +233,14 @@ const Contact = () => {
                   <div className="w-full px-4">
                     <div className="mb-6">
                       <label className="mb-2 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
-                        Engagement Scope / Requirement
+                        Engagement Scope / Requirement *
                       </label>
                       <textarea
                         name="message"
                         rows={4}
+                        required
+                        value={formData.message}
+                        onChange={handleChange}
                         placeholder="Specify your requirements (e.g. Mining safety drones, PDPA compliance audit, SOC monitoring, Tier II data center, Manpower supply)..."
                         className="w-full resize-none rounded-sm border border-stroke bg-[#f8f8f8] px-5 py-3 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
                       ></textarea>
@@ -155,8 +248,13 @@ const Contact = () => {
                   </div>
 
                   <div className="w-full px-4">
-                    <button type="submit" className="rounded-sm bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-[2px] text-white shadow-submit duration-300 hover:bg-primary/90 hover:shadow-lg active:scale-95 transition-all">
-                      Submit Formal Inquiry
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-[2px] text-white shadow-submit duration-300 hover:bg-primary/90 hover:shadow-lg active:scale-95 transition-all disabled:opacity-70 disabled:pointer-events-none"
+                    >
+                      {loading && <FiLoader className="animate-spin text-sm" />}
+                      <span>{loading ? "Transmitting..." : "Submit Formal Inquiry"}</span>
                     </button>
                   </div>
                 </div>

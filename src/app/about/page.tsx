@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -16,6 +17,7 @@ import {
   FiMail,
   FiMapPin,
   FiCheckCircle,
+  FiLoader,
 } from "react-icons/fi";
 
 const fadeUp = {
@@ -24,6 +26,72 @@ const fadeUp = {
 };
 
 const AboutPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    organization: "",
+    phone: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({
+    type: null,
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          subject: `About Page Inquiry from ${formData.name}`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit consultation request.");
+      }
+
+      setStatus({
+        type: "success",
+        message: "Thank you! Your request has been sent to info@primematrix.co.tz. Our team will contact you shortly.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        organization: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        message: err.message || "Failed to send message. Please try again or call +255 783 700 007.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const coreValues = [
     {
       title: "Integrity",
@@ -299,7 +367,7 @@ const AboutPage = () => {
           </div>
 
           {/* Team Credentials */}
-          <div className="p-8 rounded-sm bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
+          <div className="p-8 rounded-sm bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 mb-16">
             <div className="mb-6">
               <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-1">Human Capital</span>
               <h3 className="text-lg font-bold text-black dark:text-white">Staff Professional Certifications & Standards</h3>
@@ -317,6 +385,132 @@ const AboutPage = () => {
               ))}
             </div>
           </div>
+
+          {/* === About Page Consultation / Inquiry Form === */}
+          <div id="about-form" className="bg-gray-50 dark:bg-gray-800/60 p-8 md:p-12 rounded-sm border border-gray-200 dark:border-gray-700 shadow-md">
+            <div className="max-w-[700px] mb-8">
+              <span className="text-xs font-bold uppercase tracking-[3px] text-primary block mb-2">
+                Direct Inquiry
+              </span>
+              <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white">
+                Request an Institutional Consultation
+              </h3>
+              <p className="text-xs md:text-sm text-body-color dark:text-gray-300 mt-1">
+                Submit your inquiry directly to our corporate desk. All communications are transmitted directly to <strong>info@primematrix.co.tz</strong>.
+              </p>
+            </div>
+
+            {status.type === "success" && (
+              <div className="mb-6 p-4 rounded-sm bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400 text-xs md:text-sm">
+                {status.message}
+              </div>
+            )}
+
+            {status.type === "error" && (
+              <div className="mb-6 p-4 rounded-sm bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs md:text-sm">
+                {status.message}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div className="-mx-4 flex flex-wrap">
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-4">
+                    <label className="mb-1.5 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="e.g., Adamu Omari"
+                      className="w-full rounded-sm border border-stroke bg-white px-4 py-2.5 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-4">
+                    <label className="mb-1.5 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
+                      Official Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="e.g., adamu@institution.co.tz"
+                      className="w-full rounded-sm border border-stroke bg-white px-4 py-2.5 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-4">
+                    <label className="mb-1.5 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
+                      Organization / Mining Co.
+                    </label>
+                    <input
+                      type="text"
+                      name="organization"
+                      value={formData.organization}
+                      onChange={handleChange}
+                      placeholder="e.g., Bank / Ministry / Mine"
+                      className="w-full rounded-sm border border-stroke bg-white px-4 py-2.5 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-4">
+                    <label className="mb-1.5 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+255 7XX XXX XXX"
+                      className="w-full rounded-sm border border-stroke bg-white px-4 py-2.5 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full px-4">
+                  <div className="mb-6">
+                    <label className="mb-1.5 block text-[10px] uppercase tracking-widest font-bold text-dark dark:text-white">
+                      Consultation Details / Scope *
+                    </label>
+                    <textarea
+                      name="message"
+                      rows={3}
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Specify your technical, compliance, or mining requirements..."
+                      className="w-full resize-none rounded-sm border border-stroke bg-white px-4 py-2.5 text-xs md:text-sm text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary transition-all"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div className="w-full px-4">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-8 py-3.5 text-[11px] font-bold uppercase tracking-[2px] text-white shadow-submit duration-300 hover:bg-primary/90 hover:shadow-lg active:scale-95 transition-all disabled:opacity-70 disabled:pointer-events-none"
+                  >
+                    {loading && <FiLoader className="animate-spin text-sm" />}
+                    <span>{loading ? "Sending..." : "Submit Consultation Request"}</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </div>
       </section>
 
@@ -330,12 +524,12 @@ const AboutPage = () => {
             Whether preparing for a PDPA audit, upgrading core banking switch infrastructure, or deploying pre-entry safety inspection drones to a mine site, PrimeMatrix delivers regulator-ready excellence.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contact"
+            <a
+              href="#about-form"
               className="rounded-sm bg-white px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-primary hover:bg-gray-100 transition-all shadow-lg"
             >
-              Book Readiness Discussion
-            </Link>
+              Request Consultation
+            </a>
             <Link
               href="/mining"
               className="rounded-sm border border-white px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/10 transition-all"
