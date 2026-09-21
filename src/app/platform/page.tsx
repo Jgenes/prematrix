@@ -86,36 +86,62 @@ const PlatformManagementPage = () => {
         description="Comprehensive lifecycle platform governance ensuring security, stability, performance optimization, and structured operational oversight."
       />
 
-      {/* === Section: Engineering Problem Space === */}
-      <section className="py-16 md:py-24">
+      {/* === Section: Hero / Problem Space === */}
+      <section className="py-16 md:py-20 border-b border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary/30"></div>
-              <img
-                src="/images/data/siem.png"
-                alt="Platform Governance"
-                className="relative rounded-sm shadow-2xl w-full grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute -bottom-6 -right-6 p-6 bg-primary text-white hidden md:block">
-                <FiServer className="text-3xl mb-2" />
-                <p className="text-[10px] font-bold uppercase tracking-[2px]">Core Infrastructure</p>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="text-xs font-bold uppercase tracking-[4px] text-primary block mb-3">
+                Platform Governance
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-bold text-black dark:text-white leading-tight mb-6">
+                Resilient, secure platform operations built for continuity and scale.
+              </h1>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-4">
+                We help institutions manage critical infrastructure, streamline deployments, and maintain control over every stage of the platform lifecycle. The result is fewer outages, tighter security, and better operational confidence.
+              </p>
+              <p className="text-sm leading-relaxed text-body-color dark:text-gray-300 mb-6">
+                Primematrix enables structured governance across hosting, patching, access control, backups, monitoring, and release processes so your operations stay stable under pressure.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#platform-governance"
+                  className="rounded-sm bg-primary px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:bg-primary/90 transition-all"
+                >
+                  Explore Governance
+                </a>
+                <a
+                  href="/contact"
+                  className="rounded-sm border border-gray-300 dark:border-gray-700 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-black dark:text-white hover:border-primary transition-all"
+                >
+                  Talk to an Expert
+                </a>
               </div>
             </div>
-            
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-4">Technical Context</h2>
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black dark:text-white leading-tight">Institutional Platform Challenges</h3>
-              <div className="space-y-6 border-l border-gray-100 dark:border-gray-800 pl-8">
-                <div className="flex gap-4">
-                  <FiAlertTriangle className="text-primary text-xl flex-shrink-0 mt-1" />
-                  <p className="text-[14px] leading-relaxed text-body-color italic">
-                    Without structured governance, platforms become vulnerable, unstable, and exposed to significant operational risk due to lack of monitoring and patching.
-                  </p>
-                </div>
-                <p className="text-[14px] leading-relaxed opacity-85">
-                  Primematrix provides lifecycle governance designed to ensure operational continuity, security resilience, and consistent performance across production environments.
-                </p>
+
+            <div className="lg:col-span-5">
+              <div className="bg-gray-50 dark:bg-gray-800/60 p-8 rounded-sm border border-gray-200 dark:border-gray-700 shadow-lg">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-3">
+                  Operational Control
+                </h3>
+                <ul className="space-y-3 text-xs">
+                  <li className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-primary mt-0.5 flex-shrink-0" size={15} />
+                    <span><strong>Hosting:</strong> Optimised infrastructure and resource governance.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-primary mt-0.5 flex-shrink-0" size={15} />
+                    <span><strong>Security:</strong> Patch discipline, access controls, and audit readiness.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-primary mt-0.5 flex-shrink-0" size={15} />
+                    <span><strong>Resilience:</strong> Protected backups and measurable recovery planning.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-primary mt-0.5 flex-shrink-0" size={15} />
+                    <span><strong>Visibility:</strong> Continuous monitoring across production platforms.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
