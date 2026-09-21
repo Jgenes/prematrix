@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Breadcrumb from "@/components/Common/Breadcrumb";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiLayers,
@@ -103,44 +103,58 @@ const TrainingAcademyPage = () => {
 
   return (
     <div className="bg-white dark:bg-gray-dark font-sans antialiased text-gray-700 dark:text-gray-300">
-      <Breadcrumb
-        pageName="Training Academy"
-        description="Capacity-building programs enhancing technical competence, regulatory awareness, and digital operational readiness."
-      />
-
-      {/* === Section: Academy Objective === */}
-      <section className="py-16 md:py-24">
+      <section className="relative overflow-hidden border-b border-gray-100 py-16 dark:border-gray-800 md:py-24">
         <div className="container max-w-[1150px]">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative group self-start"> {/* Align image to top */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary/30"></div>
-              <img
-                src="/images/data/training.jpg"
-                alt="Academy Hub"
-                className="relative rounded-sm shadow-2xl w-full h-[260px] object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute -bottom-6 -right-6 p-6 bg-primary text-white hidden md:block">
-                <FiBookOpen className="text-3xl mb-2" />
-                <p className="text-[10px] font-bold uppercase tracking-[2px]">Capability Hub</p>
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <div className="mb-5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[3px] text-primary">
+                <span className="h-px w-8 bg-primary" />
+                PrimeMatrix Training Academy
+              </div>
+              <h1 className="mb-6 max-w-[680px] text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl">
+                Build the capability to operate securely.
+              </h1>
+              <p className="mb-8 max-w-[620px] text-sm leading-relaxed text-body-color dark:text-gray-300 md:text-base">
+                Capacity-building programs that connect technical competence, regulatory awareness, and digital operational readiness for modern institutions.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#programs"
+                  className="rounded-sm bg-primary px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-primary/90"
+                >
+                  Explore Programs
+                </a>
+                <Link
+                  href="/contact"
+                  className="rounded-sm border border-gray-300 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all hover:border-primary dark:border-gray-700 dark:text-white"
+                >
+                  Discuss Training
+                </Link>
               </div>
             </div>
-            
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-4">Capacity Building</h2>
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black dark:text-white leading-tight uppercase tracking-tighter">Academy Objectives</h3>
-              <div className="space-y-6 border-l border-gray-100 dark:border-gray-800 pl-8">
-                <p className="text-[14px] leading-relaxed text-body-color italic opacity-90">
-                  The objective is not merely knowledge transfer, but institutional capability strengthening. Programs are aligned with regulatory standards and enterprise risk models.
-                </p>
-                <div className="grid grid-cols-2 gap-6 pt-4">
-                    <div className="flex items-center gap-3">
-                        <FiCheckCircle className="text-primary text-[14px]" />
-                        <span className="text-[12px] font-bold uppercase tracking-wider">Regulatory Alignment</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <FiCheckCircle className="text-primary text-[14px]" />
-                        <span className="text-[12px] font-bold uppercase tracking-wider">Technical Mastery</span>
-                    </div>
+
+            <div className="lg:col-span-5">
+              <div className="border border-gray-200 bg-gray-50 p-7 shadow-lg dark:border-gray-700 dark:bg-gray-800/60 md:p-8">
+                <div className="mb-6 flex items-start justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-700">
+                  <div>
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[3px] text-primary">Academy Framework</p>
+                    <h2 className="text-lg font-bold uppercase tracking-tight text-black dark:text-white">Learning that holds up</h2>
+                  </div>
+                  <FiBookOpen className="mt-1 shrink-0 text-2xl text-primary" />
+                </div>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-xs">
+                  <div>
+                    <p className="mb-1 text-2xl font-bold text-primary">06</p>
+                    <p className="font-bold uppercase tracking-wider text-body-color">Learning tracks</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 text-2xl font-bold text-black dark:text-white">360°</p>
+                    <p className="font-bold uppercase tracking-wider text-body-color">Capability focus</p>
+                  </div>
+                  <div className="col-span-2 border-t border-gray-200 pt-5 text-body-color dark:border-gray-700">
+                    <span className="font-bold uppercase tracking-wider text-primary">Designed for</span>
+                    <p className="mt-2 leading-relaxed">Technical teams, executives, and institutions responsible for secure digital operations.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -149,7 +163,7 @@ const TrainingAcademyPage = () => {
       </section>
 
       {/* === Section: Academy Sections Grid === */}
-      <section className="py-20 bg-gray-50/50 dark:bg-gray-900/10 border-y border-gray-100 dark:border-gray-800">
+      <section id="programs" className="py-20 bg-gray-50/50 dark:bg-gray-900/10 border-y border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div className="max-w-xl">

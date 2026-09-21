@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Breadcrumb from "@/components/Common/Breadcrumb";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   FiX, FiShield, FiLayers, FiSettings, 
@@ -81,40 +81,47 @@ const FintechDevelopmentPage = () => {
 
   return (
     <div className="bg-white dark:bg-gray-dark font-sans antialiased text-gray-700 dark:text-gray-300">
-      <Breadcrumb
-        pageName="Fintech Development"
-        description="Secure, compliant, and scalable fintech system design ensuring reliable payments, digital wallets, and transaction integrity."
-      />
-
-      {/* === Section: Engineering Problem Space === */}
-      <section className="py-16 md:py-24">
+      <section className="relative overflow-hidden border-b border-gray-100 py-16 dark:border-gray-800 md:py-24">
         <div className="container max-w-[1150px]">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary/30"></div>
-              <img
-                src="/images/data/fintech.jpg"
-                alt="Fintech Infrastructure"
-                className="relative rounded-sm shadow-2xl w-full grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute -bottom-6 -right-6 p-6 bg-primary text-white hidden md:block">
-                <FiShield className="text-3xl mb-2" />
-                <p className="text-[10px] font-bold uppercase tracking-[2px]">Fiscal Security</p>
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <div className="mb-5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[3px] text-primary">
+                <span className="h-px w-8 bg-primary" />
+                PrimeMatrix Fintech Engineering
+              </div>
+              <h1 className="mb-6 max-w-[680px] text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl">
+                Build financial systems people can trust.
+              </h1>
+              <p className="mb-8 max-w-[620px] text-sm leading-relaxed text-body-color dark:text-gray-300 md:text-base">
+                Secure, compliant, and scalable fintech architecture for reliable payments, digital wallets, lending, and transaction integrity.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#capabilities"
+                  className="rounded-sm bg-primary px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-primary/90"
+                >
+                  Explore Capabilities
+                </a>
+                <Link
+                  href="/contact"
+                  className="rounded-sm border border-gray-300 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all hover:border-primary dark:border-gray-700 dark:text-white"
+                >
+                  Discuss Your System
+                </Link>
               </div>
             </div>
-            
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[4px] text-primary mb-4">Technical Context</h2>
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black dark:text-white leading-tight">Institutional Fintech Challenges</h3>
-              <div className="space-y-6 border-l border-gray-100 dark:border-gray-800 pl-8">
-                <div className="flex gap-4">
-                  <FiAlertTriangle className="text-primary text-xl flex-shrink-0 mt-1" />
-                  <p className="text-[14px] leading-relaxed text-body-color italic">
-                    Financial technology platforms face high security, regulatory, and operational risks. Weak architecture can result in fraud, data leaks, and compliance penalties.
-                  </p>
+
+            <div className="lg:col-span-5">
+              <div className="border border-gray-200 bg-gray-50 p-7 shadow-lg dark:border-gray-700 dark:bg-gray-800/60 md:p-8">
+                <div className="flex items-center justify-between gap-4 border-b border-gray-200 pb-5 dark:border-gray-700">
+                  <div>
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[3px] text-primary">Engineering Focus</p>
+                    <h2 className="text-lg font-bold uppercase tracking-tight text-black dark:text-white">Transaction confidence</h2>
+                  </div>
+                  <FiShield className="shrink-0 text-3xl text-primary" />
                 </div>
-                <p className="text-[14px] leading-relaxed opacity-85">
-                  Primematrix addresses these gaps by designing secure fintech systems with robust architecture and encryption protocols, ensuring safe digital transactions while maintaining regulatory compliance.
+                <p className="pt-5 text-sm leading-relaxed text-body-color dark:text-gray-300">
+                  Architecture that protects every transaction from system design through operational scale.
                 </p>
               </div>
             </div>
@@ -123,7 +130,7 @@ const FintechDevelopmentPage = () => {
       </section>
 
       {/* === Section: The Engineering Grid === */}
-      <section className="py-20 bg-gray-50/50 dark:bg-gray-900/10 border-y border-gray-100 dark:border-gray-800">
+      <section id="capabilities" className="py-20 bg-gray-50/50 dark:bg-gray-900/10 border-y border-gray-100 dark:border-gray-800">
         <div className="container max-w-[1150px]">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div className="max-w-xl">
